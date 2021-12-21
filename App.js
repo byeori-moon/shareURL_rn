@@ -1,21 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import firstScreen from './src/firstScreen';
+import login from './src/login';
+import signin, { userData } from './src/signin';
+import login2 from './src/login2';
+const Stack = createStackNavigator();
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+class App extends React.Component {
+  render() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="firstScreen">
+          <Stack.Screen name="firstScreen" component={firstScreen} options={{ title: '메인화면' }} />
+          <Stack.Screen name="login" component={login} options={{ title: '회원 로그인' }} />
+          <Stack.Screen name="login2" component={login2} options={{ title: '비회원 로그인' }} />
+          <Stack.Screen name="signin" component={signin} options={{ title: '회원가입' }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
